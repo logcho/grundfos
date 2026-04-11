@@ -4,13 +4,17 @@ import { useState } from "react";
 import { MapPlaceholder } from "@/components/map-placeholder";
 import { Sidebar } from "@/components/sidebar";
 import buildingsData from "../data/buildings.json";
+import { calculateFinancialROI } from "../utils/finance";
+import { calculateViabilityScore } from "../utils/viability_score";
 
 export type Building = {
   id: string;
   latitude: number;
   longitude: number;
   area_sqm: number;
-  status: "Pending" | "Scanning" | "Viable" | "Rejected";
+  status: "Pending" | "Scanning" | "Viable" | "Rejected" | "Prime Target";
+  viability_score?: number;
+  annual_savings?: number;
   spatial_data?: {
     area_sqft: number;
     annual_yield_gallons: number;
@@ -44,10 +48,19 @@ export default function Home() {
       const data = await response.json();
 
       if (data.status === "success") {
-        const isViable = data.spatial_data.meets_100k_threshold && data.cv_data.cooling_tower_present;
+        const { annualSavings } = calculateFinancialROI(data.spatial_data.annual_yield_gallons);
+        const { score, status } = calculateViabilityScore({
+          usableSqft: data.spatial_data.area_sqft,
+          annualSavings,
+          hasCoolingTowers: data.cv_data.cooling_tower_present,
+          esgRiskScore: 65 // Placeholder for now
+        });
+
         setBuildings((prev) => prev.map((b) => (b.id === id ? { 
           ...b, 
-          status: isViable ? "Viable" : "Rejected",
+          status: status === "PRIME TARGET" ? "Prime Target" : (status === "VIABLE" ? "Viable" : "Rejected"),
+          viability_score: score,
+          annual_savings: annualSavings,
           spatial_data: data.spatial_data,
           cv_data: data.cv_data,
         } : b)));

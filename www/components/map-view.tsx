@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Map, { NavigationControl, Marker, MapRef } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Building } from "@/app/page";
+import { calculateFinancialROI } from "@/utils/finance";
+import { calculateViabilityScore } from "@/utils/viability_score";
 
 type MapViewProps = {
   buildings: Building[];
@@ -29,7 +31,7 @@ function EngineResultsCard({ data, onClose }: { data: Building; onClose: () => v
             ✕
           </button>
         </div>
-        
+
         <div className="space-y-4 p-4">
           {/* Spatial Data */}
           <div>
@@ -47,6 +49,12 @@ function EngineResultsCard({ data, onClose }: { data: Building; onClose: () => v
                 <p className="text-[10px] text-slate-400">Est. Yield</p>
                 <p className="text-sm font-semibold text-blue-400">
                   {data.spatial_data.annual_yield_gallons.toLocaleString()} <span className="text-[10px] font-normal">gal</span>
+                </p>
+              </div>
+              <div className="col-span-2 rounded-xl bg-white/5 p-3 ring-1 ring-emerald-500/30">
+                <p className="text-[10px] text-emerald-400 font-bold tracking-wider uppercase">Projected Annual Savings</p>
+                <p className="text-lg font-bold text-emerald-300 drop-shadow-sm">
+                  ${calculateFinancialROI(data.spatial_data.annual_yield_gallons).annualSavings.toLocaleString()} <span className="text-[10px] font-medium text-emerald-400/80">USD/yr</span>
                 </p>
               </div>
             </div>
@@ -77,7 +85,8 @@ function EngineResultsCard({ data, onClose }: { data: Building; onClose: () => v
           {/* Verdict */}
           <div className={`mt-2 rounded-xl p-3 text-center transition-all ${isViable ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 ring-1 ring-cyan-500/50' : 'bg-white/5'}`}>
             <p className={`text-sm font-bold ${isViable ? 'text-cyan-300 drop-shadow-sm' : 'text-slate-500'}`}>
-              {isViable ? "★ High Viability Target" : "Does Not Meet Criteria"}
+              {/* {isViable ? "★ High Viability Target" : "Does Not Meet Criteria"} */}
+              {data.status === "Prime Target" ? `★ PRIME TARGET (Score: ${data.viability_score})` : (isViable ? `VIABLE PROSPECT (Score: ${data.viability_score})` : `REJECTED (Score: ${data.viability_score})`)}
             </p>
           </div>
         </div>
@@ -137,20 +146,21 @@ export function MapView({ buildings, activeBuildingId, onScanBuilding, className
         {(() => {
           const activeBuilding = buildings.find(b => b.id === activeBuildingId);
           const showCard = activeBuilding && activeBuilding.spatial_data && activeBuilding.cv_data && hiddenCardId !== activeBuilding.id;
-          
+
           return showCard ? (
-            <EngineResultsCard 
-              data={activeBuilding} 
-              onClose={() => setHiddenCardId(activeBuilding.id)} 
+            <EngineResultsCard
+              data={activeBuilding}
+              onClose={() => setHiddenCardId(activeBuilding.id)}
             />
           ) : null;
         })()}
 
         {buildings.map(b => {
           const isActive = b.id === activeBuildingId;
-          
+
           let color = "#94a3b8"; // Base slate-400
           if (b.status === "Scanning") color = "#fbbf24"; // amber-400
+          else if (b.status === "Prime Target") color = "#d97706"; // amber-600 (Gold)
           else if (b.status === "Viable") color = "#10b981"; // emerald-500
           else if (b.status === "Rejected") color = "#f43f5e"; // rose-500 
 
@@ -158,9 +168,9 @@ export function MapView({ buildings, activeBuildingId, onScanBuilding, className
           if (isActive && b.status === "Pending") color = "#06b6d4"; // cyan-500
 
           return (
-            <Marker 
-              key={b.id} 
-              latitude={b.latitude} 
+            <Marker
+              key={b.id}
+              latitude={b.latitude}
               longitude={b.longitude}
               onClick={(e) => {
                 e.originalEvent.stopPropagation();

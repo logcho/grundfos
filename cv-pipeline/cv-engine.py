@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def get_satellite_image(lat, lng, zoom=19, size="640x640"):
+def get_satellite_image(lat, lng, zoom=17, size="640x640"):
     """
     Fetches the image and drops a red map pin EXACTLY on the target coordinate
     to act as a visual anchor for the AI.
