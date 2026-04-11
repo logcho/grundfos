@@ -14,9 +14,30 @@ type MapViewProps = {
   onBuildingSelect?: (selection: BuildingSelection) => void;
 };
 
+// Inside your Next.js Mapbox onClick handler
+async function handleMapClick(e: { lngLat: { lng: any; lat: any; }; }) {
+  const { lng, lat } = e.lngLat;
+
+  // Set UI to loading state...
+
+  try {
+    const response = await fetch(`http://localhost:8000/api/analyze?lat=${lat}&lng=${lng}`);
+    const data = await response.json();
+
+    if (data.status === "success") {
+      console.log("Engine Results:", data);
+      // Update your React state to show the dashboard!
+      // setBuildingStats(data);
+    }
+  } catch (error) {
+    console.error("Failed to reach Viability Engine:", error);
+  }
+}
+
 export function MapView({ className, onBuildingSelect }: MapViewProps) {
   const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
   const [lastSelection, setLastSelection] = useState<BuildingSelection | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   if (!mapboxToken) {
     return (
@@ -42,15 +63,34 @@ export function MapView({ className, onBuildingSelect }: MapViewProps) {
         mapboxAccessToken={mapboxToken}
         mapStyle="mapbox://styles/mapbox/light-v11"
         style={{ width: "100%", height: "100%" }}
-        onClick={(event) => {
+        onClick={async (event) => {
+          const lat = event.lngLat.lat;
+          const lng = event.lngLat.lng;
+
           const selection: BuildingSelection = {
-            latitude: event.lngLat.lat,
-            longitude: event.lngLat.lng,
+            latitude: lat,
+            longitude: lng,
           };
 
           console.log("Map click coordinates:", selection);
           setLastSelection(selection);
           onBuildingSelect?.(selection);
+
+          setIsLoading(true);
+          try {
+            const response = await fetch(`http://localhost:8000/api/analyze?lat=${lat}&lng=${lng}`);
+            const data = await response.json();
+
+            if (data.status === "success") {
+              console.log("Engine Results:", data);
+              // Update your React state to show the dashboard!
+              // e.g. onEngineResult?.(data);
+            }
+          } catch (error) {
+            console.error("Failed to reach Viability Engine:", error);
+          } finally {
+            setIsLoading(false);
+          }
         }}
       >
         <NavigationControl position="top-right" />
@@ -60,6 +100,7 @@ export function MapView({ className, onBuildingSelect }: MapViewProps) {
         <div className="pointer-events-none absolute bottom-3 left-3 rounded-md bg-slate-900/90 px-3 py-2 text-xs text-white shadow-lg">
           <p>Lat: {lastSelection.latitude.toFixed(6)}</p>
           <p>Lng: {lastSelection.longitude.toFixed(6)}</p>
+          {isLoading && <p className="mt-1 text-amber-400">Analyzing building...</p>}
         </div>
       ) : null}
     </div>
