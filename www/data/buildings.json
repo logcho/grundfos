@@ -1,0 +1,452 @@
+[
+  {
+    "id": "6d61f79a-eb06-4d6c-bcf3-4e864786d9af",
+    "latitude": 32.75551929999999,
+    "longitude": -96.94856095,
+    "area_sqm": 138694.8969198455,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "ae9af7d2-2247-41af-9aa4-91720eddd3ad",
+    "latitude": 32.75557181203985,
+    "longitude": -96.94551809667696,
+    "area_sqm": 135529.560312278,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "2b6a862a-049f-4be0-b907-b92326b99589",
+    "latitude": 32.75866673336421,
+    "longitude": -96.88412413731116,
+    "area_sqm": 133985.44844389384,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "eb3c3cd4-91b8-4875-8efb-4aa2986d6820",
+    "latitude": 32.786360321870085,
+    "longitude": -96.88778284787632,
+    "area_sqm": 133621.77475816372,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "20314402-04f8-4219-94a6-e6e206aa0573",
+    "latitude": 32.755735562320055,
+    "longitude": -96.90423038073102,
+    "area_sqm": 113778.97744754195,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "8323d1b2-4913-49c8-8deb-1f160c496324",
+    "latitude": 32.78717508860809,
+    "longitude": -96.88438307458608,
+    "area_sqm": 101592.25539849632,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "b2223463-5997-40ed-bfed-10af65b08704",
+    "latitude": 32.84413032068872,
+    "longitude": -96.89491131412532,
+    "area_sqm": 95584.9006802283,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "368a2ca5-274b-49cd-9e7e-06872cd49ee6",
+    "latitude": 32.76044092694171,
+    "longitude": -96.90429766470206,
+    "area_sqm": 89147.64285792618,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "4bfead3f-23cc-4eab-9ea8-47a76b6aa009",
+    "latitude": 32.760422323485194,
+    "longitude": -96.89714032011156,
+    "area_sqm": 85062.73694770253,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "c9e7e238-cbda-4bac-b8ec-7fc70c380fe8",
+    "latitude": 32.76393122070661,
+    "longitude": -96.90681939573624,
+    "area_sqm": 80476.38237472567,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "e15bd611-587a-42ed-a433-d77acc719c5c",
+    "latitude": 32.77350279536715,
+    "longitude": -96.88852398503204,
+    "area_sqm": 76663.5880094874,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "affdf232-64dc-4378-a12c-12db1094c79c",
+    "latitude": 32.7628687072325,
+    "longitude": -96.88684152069332,
+    "area_sqm": 73525.57984075352,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "f10f338b-9004-4aeb-9414-e2fabafb7d65",
+    "latitude": 32.82198098085168,
+    "longitude": -96.88577912786418,
+    "area_sqm": 69981.0669689892,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "a4e924aa-687f-4ece-a362-0660130970bd",
+    "latitude": 32.757529324135845,
+    "longitude": -96.9001794968894,
+    "area_sqm": 67855.52332433707,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "005fcf9c-d8be-4b37-a72d-d7e36109c5ed",
+    "latitude": 32.771276473709854,
+    "longitude": -96.8989092161692,
+    "area_sqm": 64147.32549920402,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "99f834c1-8215-47b4-8155-c481f76053db",
+    "latitude": 32.751175077472304,
+    "longitude": -96.88591632148405,
+    "area_sqm": 63341.386314361414,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "610fdcac-4d8a-4757-a01e-51aa5e6e7dab",
+    "latitude": 32.76232983767436,
+    "longitude": -96.890783465572,
+    "area_sqm": 62254.395936069544,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "dc0ef0bf-f01e-4687-a584-b6d41d07d9d3",
+    "latitude": 32.80974138980791,
+    "longitude": -96.87688575554228,
+    "area_sqm": 61814.84827761217,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "5f9254ac-f88b-47b6-b9cf-c7cbbcae26e9",
+    "latitude": 32.76548078431109,
+    "longitude": -96.86475748217867,
+    "area_sqm": 60895.82486876433,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "143e58ca-e802-4e03-9456-12c3f0521f02",
+    "latitude": 32.776934676991296,
+    "longitude": -96.85383378741912,
+    "area_sqm": 60027.32608871967,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "ed5ffba2-a1ba-42c8-9143-34c43c9c7738",
+    "latitude": 32.76120939147415,
+    "longitude": -96.88239608516568,
+    "area_sqm": 58328.51169330634,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "edceee29-2010-47be-a301-6d17a4d10224",
+    "latitude": 32.81842793166095,
+    "longitude": -96.85298719094648,
+    "area_sqm": 50350.83603399143,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "51788306-99e0-489b-91ca-4918f2794932",
+    "latitude": 32.83024231486973,
+    "longitude": -96.88132224646846,
+    "area_sqm": 48530.202171308505,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "502490e8-daf0-4ee9-8c2a-63455c7ccb8c",
+    "latitude": 32.75430302025042,
+    "longitude": -96.89510396641336,
+    "area_sqm": 48307.74749210174,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "e9dda416-d2de-4852-895f-8ec1972f3311",
+    "latitude": 32.76582219270379,
+    "longitude": -96.88664578033888,
+    "area_sqm": 47614.4851004237,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "51b0df8d-3e46-41c0-9631-0e390bd9c229",
+    "latitude": 32.752977992142,
+    "longitude": -96.88952528915355,
+    "area_sqm": 47521.97872198207,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "7492141d-09ec-4833-9caa-73359fd44c1c",
+    "latitude": 32.76576006472202,
+    "longitude": -96.88913738603974,
+    "area_sqm": 47156.63342850289,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "7d7ab1b1-2032-4e40-b00b-69b50912c8ae",
+    "latitude": 32.821872263157815,
+    "longitude": -96.91823529914733,
+    "area_sqm": 44922.90218862762,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "081ab425-09b2-4731-8da4-19e3bac466dc",
+    "latitude": 32.819265937765806,
+    "longitude": -96.84912683971154,
+    "area_sqm": 43992.16107330012,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "78498350-941a-4ca4-8b2b-365e16ac2dfc",
+    "latitude": 32.84751792394248,
+    "longitude": -96.8646497205221,
+    "area_sqm": 43960.545770583354,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "ba3fac59-92a9-4fff-9e48-3c99ae361bb1",
+    "latitude": 32.82484634095444,
+    "longitude": -96.9494279206977,
+    "area_sqm": 43764.8461111163,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "115d17c9-02b4-4d26-9ca5-ff4bb6f19a0f",
+    "latitude": 32.76072501007306,
+    "longitude": -96.88608930824778,
+    "area_sqm": 43757.9719509848,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "ec0d2325-c888-4965-8769-7777d31934f0",
+    "latitude": 32.84012025491421,
+    "longitude": -96.92773487191278,
+    "area_sqm": 43611.47965494142,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "886cde94-5108-4f71-96da-8f36e25772c3",
+    "latitude": 32.839241618068286,
+    "longitude": -96.92368142302756,
+    "area_sqm": 43588.24705993588,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "80e6973e-2953-40c4-b1e1-499472469d53",
+    "latitude": 32.75149537914331,
+    "longitude": -96.88213098100891,
+    "area_sqm": 43401.15560049918,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "1d962796-1e10-4849-8e2f-f740fffeeca3",
+    "latitude": 32.75187168719113,
+    "longitude": -96.87825207513067,
+    "area_sqm": 42320.86755214857,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "8eb7a57a-e189-454a-af1d-9cfb9acbe574",
+    "latitude": 32.77258882189644,
+    "longitude": -96.88168065073532,
+    "area_sqm": 41520.75966995915,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "9a082db5-d1de-48b3-9f63-9dc04fb9d035",
+    "latitude": 32.76035361837558,
+    "longitude": -96.90070588899135,
+    "area_sqm": 41505.684655533456,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "51840462-4cf3-4fdc-ae43-ed73eba13d5c",
+    "latitude": 32.776723530325334,
+    "longitude": -96.90134009870488,
+    "area_sqm": 41360.14070889949,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "59f5af99-f6d0-4fdb-ad18-22f63eb67952",
+    "latitude": 32.81942111726471,
+    "longitude": -96.88230657332198,
+    "area_sqm": 41346.24726247128,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "ed063a87-bf49-466f-8543-413ba97c58bf",
+    "latitude": 32.77383998823339,
+    "longitude": -96.90044928978818,
+    "area_sqm": 41336.8119505537,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "e884b05a-5f0d-44b1-9e8b-d08a3adf08d5",
+    "latitude": 32.7720306504771,
+    "longitude": -96.89300452817416,
+    "area_sqm": 40080.3033749619,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "9d53ef4c-a1bd-4797-bb16-1d01550a183e",
+    "latitude": 32.77367162121196,
+    "longitude": -96.88173172959657,
+    "area_sqm": 39022.65243019544,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "e7b6035a-dcb4-4961-87d5-2d268dace25e",
+    "latitude": 32.760683258177515,
+    "longitude": -96.94353955696565,
+    "area_sqm": 38314.218144458755,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "cf08c4aa-92ce-40fc-a38c-12bd5394b8b5",
+    "latitude": 32.83857997778899,
+    "longitude": -96.8651291835648,
+    "area_sqm": 38166.56590788952,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "b7e15d6f-5a2b-4ab7-82d3-9f0f13fa7b3b",
+    "latitude": 32.79279127950537,
+    "longitude": -96.94676176159024,
+    "area_sqm": 38106.16206287193,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "d3f6e523-e49d-4228-96a2-b910eb89b4ee",
+    "latitude": 32.77452641890669,
+    "longitude": -96.88424891431976,
+    "area_sqm": 37813.68119309575,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "bf910062-5619-4174-824e-9260abec028d",
+    "latitude": 32.81914863766265,
+    "longitude": -96.91501210626912,
+    "area_sqm": 37561.81338922833,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "07675b24-8b0d-4581-aacb-31c2cf4d17a1",
+    "latitude": 32.76581735,
+    "longitude": -96.88395475,
+    "area_sqm": 37085.56963152931,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  },
+  {
+    "id": "7a2e90c3-ae7e-404b-a2d6-6132a97b3562",
+    "latitude": 32.845299881351984,
+    "longitude": -96.86247308963208,
+    "area_sqm": 36060.57452435408,
+    "status": "Pending",
+    "spatial_data": null,
+    "cv_data": null
+  }
+]

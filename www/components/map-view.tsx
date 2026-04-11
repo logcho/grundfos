@@ -1,30 +1,27 @@
 "use client";
 
-import { useState } from "react";
-import Map, { NavigationControl } from "react-map-gl/mapbox";
+import { useEffect, useRef, useState } from "react";
+import Map, { NavigationControl, Marker, MapRef } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
-
-export interface BuildingSelection {
-  latitude: number;
-  longitude: number;
-}
+import { Building } from "@/app/page";
 
 type MapViewProps = {
+  buildings: Building[];
+  activeBuildingId: string | null;
+  onScanBuilding: (id: string) => void;
   className?: string;
-  onBuildingSelect?: (selection: BuildingSelection) => void;
 };
 
-function EngineResultsCard({ data, onClose }: { data: any; onClose: () => void }) {
-  if (!data) return null;
+function EngineResultsCard({ data, onClose }: { data: Building; onClose: () => void }) {
+  if (!data.spatial_data || !data.cv_data) return null;
 
-  const isViable =
-    data.spatial_data.meets_100k_threshold && data.cv_data.cooling_tower_present;
+  const isViable = data.status === "Viable";
 
   return (
     <div className="absolute right-4 top-4 z-10 w-80 animate-in fade-in slide-in-from-right-4 duration-500">
       <div className="overflow-hidden rounded-2xl border border-white/20 bg-slate-900/85 text-slate-100 shadow-2xl backdrop-blur-xl">
         <div className="flex items-center justify-between border-b border-white/10 bg-black/20 px-4 py-3">
-          <h3 className="font-semibold text-white tracking-wide">Viability Engine</h3>
+          <h3 className="font-semibold tracking-wide text-white">Viability Engine</h3>
           <button
             onClick={onClose}
             className="rounded-full bg-white/10 p-1 text-slate-300 transition-colors hover:bg-white/20 hover:text-white"
@@ -32,7 +29,7 @@ function EngineResultsCard({ data, onClose }: { data: any; onClose: () => void }
             ✕
           </button>
         </div>
-
+        
         <div className="space-y-4 p-4">
           {/* Spatial Data */}
           <div>
@@ -89,35 +86,29 @@ function EngineResultsCard({ data, onClose }: { data: any; onClose: () => void }
   );
 }
 
-// Inside your Next.js Mapbox onClick handler
-async function handleMapClick(e: { lngLat: { lng: any; lat: any; }; }) {
-  const { lng, lat } = e.lngLat;
-
-  // Set UI to loading state...
-
-  try {
-    const response = await fetch(`http://localhost:8000/api/analyze?lat=${lat}&lng=${lng}`);
-    const data = await response.json();
-
-    if (data.status === "success") {
-      console.log("Engine Results:", data);
-      // Update your React state to show the dashboard!
-      // setBuildingStats(data);
-    }
-  } catch (error) {
-    console.error("Failed to reach Viability Engine:", error);
-  }
-}
-
-export function MapView({ className, onBuildingSelect }: MapViewProps) {
+export function MapView({ buildings, activeBuildingId, onScanBuilding, className }: MapViewProps) {
+  const [hiddenCardId, setHiddenCardId] = useState<string | null>(null);
   const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
-  const [lastSelection, setLastSelection] = useState<BuildingSelection | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [engineResults, setEngineResults] = useState<any>(null);
+  const mapRef = useRef<MapRef>(null);
+
+  // Auto-fly to the active building when it changes
+  useEffect(() => {
+    if (activeBuildingId && mapRef.current) {
+      const activeBuilding = buildings.find(b => b.id === activeBuildingId);
+      if (activeBuilding) {
+        mapRef.current.flyTo({
+          center: [activeBuilding.longitude, activeBuilding.latitude],
+          zoom: 18, // Zoom in tight to see the target roof precisely
+          duration: 1500,
+          essential: true
+        });
+      }
+    }
+  }, [activeBuildingId, buildings]);
 
   if (!mapboxToken) {
     return (
-      <div className={["flex h-full w-full items-center justify-center rounded-xl border border-amber-300 bg-amber-50 p-6", className].join(" ")}>
+      <div className={["flex h-full w-full items-center justify-center rounded-[inherit] border border-amber-300 bg-amber-50 p-6", className].join(" ")}>
         <div className="max-w-sm text-center">
           <p className="text-sm font-semibold text-amber-900">Mapbox token is missing</p>
           <p className="mt-1 text-sm text-amber-800">
@@ -129,61 +120,64 @@ export function MapView({ className, onBuildingSelect }: MapViewProps) {
   }
 
   return (
-    <div className={["relative h-full w-full", className].join(" ")}>
+    <div className={["relative h-full w-full rounded-[inherit]", className].join(" ")}>
       <Map
+        ref={mapRef}
         initialViewState={{
-          latitude: 32.7767,
-          longitude: -96.797,
-          zoom: 10,
+          latitude: 32.756,
+          longitude: -96.864,
+          zoom: 12,
         }}
         mapboxAccessToken={mapboxToken}
         mapStyle="mapbox://styles/mapbox/satellite-v9"
         style={{ width: "100%", height: "100%" }}
-        onClick={async (event) => {
-          const lat = event.lngLat.lat;
-          const lng = event.lngLat.lng;
-
-          const selection: BuildingSelection = {
-            latitude: lat,
-            longitude: lng,
-          };
-
-          console.log("Map click coordinates:", selection);
-          setLastSelection(selection);
-          onBuildingSelect?.(selection);
-
-          setIsLoading(true);
-          try {
-            const response = await fetch(`http://localhost:8000/api/analyze?lat=${lat}&lng=${lng}`);
-            const data = await response.json();
-
-            if (data.status === "success") {
-              console.log("Engine Results:", data);
-              setEngineResults(data);
-              // Update your React state to show the dashboard!
-              // e.g. onEngineResult?.(data);
-            }
-          } catch (error) {
-            console.error("Failed to reach Viability Engine:", error);
-          } finally {
-            setIsLoading(false);
-          }
-        }}
       >
         <NavigationControl position="top-right" />
+
+        {(() => {
+          const activeBuilding = buildings.find(b => b.id === activeBuildingId);
+          const showCard = activeBuilding && activeBuilding.spatial_data && activeBuilding.cv_data && hiddenCardId !== activeBuilding.id;
+          
+          return showCard ? (
+            <EngineResultsCard 
+              data={activeBuilding} 
+              onClose={() => setHiddenCardId(activeBuilding.id)} 
+            />
+          ) : null;
+        })()}
+
+        {buildings.map(b => {
+          const isActive = b.id === activeBuildingId;
+          
+          let color = "#94a3b8"; // Base slate-400
+          if (b.status === "Scanning") color = "#fbbf24"; // amber-400
+          else if (b.status === "Viable") color = "#10b981"; // emerald-500
+          else if (b.status === "Rejected") color = "#94a3b8"; // stay slate 
+
+          // Highlighting overrides
+          if (isActive && b.status === "Pending") color = "#06b6d4"; // cyan-500
+
+          return (
+            <Marker 
+              key={b.id} 
+              latitude={b.latitude} 
+              longitude={b.longitude}
+              onClick={(e) => {
+                e.originalEvent.stopPropagation();
+                onScanBuilding(b.id);
+              }}
+              style={{ cursor: 'pointer' }}
+            >
+              <div className={`relative flex h-8 w-8 items-center justify-center -translate-y-1/2`}>
+                <div className={`absolute h-4 w-4 rounded-full border-[3px] border-white shadow-lg transition-all duration-300 ${isActive ? 'scale-150 ring-[6px] ring-black/20' : 'hover:scale-125 hover:ring-4 hover:ring-black/10'}`} style={{ backgroundColor: color }} />
+                {b.status === "Scanning" && (
+                  <div className="absolute h-8 w-8 animate-ping rounded-full opacity-75" style={{ backgroundColor: color }} />
+                )}
+              </div>
+            </Marker>
+          )
+        })}
       </Map>
-
-      {engineResults && (
-        <EngineResultsCard data={engineResults} onClose={() => setEngineResults(null)} />
-      )}
-
-      {lastSelection ? (
-        <div className="pointer-events-none absolute bottom-3 left-3 rounded-md bg-slate-900/90 px-3 py-2 text-xs text-white shadow-lg">
-          <p>Lat: {lastSelection.latitude.toFixed(6)}</p>
-          <p>Lng: {lastSelection.longitude.toFixed(6)}</p>
-          {isLoading && <p className="mt-1 text-amber-400 font-semibold tracking-wide">Analyzing building...</p>}
-        </div>
-      ) : null}
     </div>
   );
 }

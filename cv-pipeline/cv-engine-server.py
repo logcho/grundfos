@@ -56,8 +56,8 @@ async def analyze_location(lat: float, lng: float):
         roof_img = get_satellite_image(lat, lng)
         
         # Debugging: Show the actual image being passed to the Vision LLM
-        print("DEBUG: Opening the satellite image in default viewer...")
-        roof_img.show()
+        # print("DEBUG: Opening the satellite image in default viewer...")
+        # roof_img.show()
         
         cv_result = detect_cooling_towers(roof_img)
         
