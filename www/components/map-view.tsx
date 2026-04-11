@@ -18,7 +18,7 @@ function EngineResultsCard({ data, onClose }: { data: Building; onClose: () => v
   const isViable = data.status === "Viable";
 
   return (
-    <div className="absolute right-4 top-4 z-10 w-80 animate-in fade-in slide-in-from-right-4 duration-500">
+    <div className="absolute right-2 left-2 sm:left-auto sm:right-4 top-2 sm:top-4 z-10 w-auto sm:w-80 animate-in fade-in slide-in-from-right-4 duration-500">
       <div className="overflow-hidden rounded-2xl border border-white/20 bg-slate-900/85 text-slate-100 shadow-2xl backdrop-blur-xl">
         <div className="flex items-center justify-between border-b border-white/10 bg-black/20 px-4 py-3">
           <h3 className="font-semibold tracking-wide text-white">Viability Engine</h3>
@@ -152,7 +152,7 @@ export function MapView({ buildings, activeBuildingId, onScanBuilding, className
           let color = "#94a3b8"; // Base slate-400
           if (b.status === "Scanning") color = "#fbbf24"; // amber-400
           else if (b.status === "Viable") color = "#10b981"; // emerald-500
-          else if (b.status === "Rejected") color = "#94a3b8"; // stay slate 
+          else if (b.status === "Rejected") color = "#f43f5e"; // rose-500 
 
           // Highlighting overrides
           if (isActive && b.status === "Pending") color = "#06b6d4"; // cyan-500

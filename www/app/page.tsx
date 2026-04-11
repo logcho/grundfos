@@ -61,16 +61,16 @@ export default function Home() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[linear-gradient(155deg,#f8fafc_0%,#e2e8f0_100%)]">
-      <div className="flex h-screen flex-col lg:flex-row">
+    <div className="relative h-[100dvh] w-full overflow-hidden bg-[linear-gradient(155deg,#f8fafc_0%,#e2e8f0_100%)]">
+      <div className="flex h-full flex-col lg:flex-row">
         <Sidebar 
           buildings={buildings}
           activeBuildingId={activeBuildingId}
           onScanBuilding={handleBuildingScan}
         />
 
-        <main className="flex-1 p-4 md:p-6 overflow-hidden flex flex-col pt-safe">
-          <div className="mb-4 flex shrink-0 items-center justify-between rounded-xl border border-slate-200 bg-white/90 px-4 py-3 shadow-sm backdrop-blur">
+        <main className="flex-1 order-1 lg:order-2 p-0 lg:p-6 overflow-hidden flex flex-col pt-safe min-h-0 z-0">
+          <div className="hidden lg:flex mb-4 shrink-0 items-center justify-between rounded-xl border border-slate-200 bg-white/90 px-4 py-3 shadow-sm backdrop-blur">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-cyan-700">Grundfos Intelligence</p>
               <h2 className="text-xl font-semibold text-slate-900">Rainwater Yield Tracker</h2>
@@ -80,7 +80,7 @@ export default function Home() {
             </span>
           </div>
 
-          <div className="relative min-h-0 flex-1 overflow-hidden rounded-2xl border border-slate-200 shadow-md">
+          <div className="relative min-h-0 flex-1 overflow-hidden lg:rounded-2xl lg:border border-slate-200 lg:shadow-md">
             <MapPlaceholder 
               buildings={buildings}
               activeBuildingId={activeBuildingId}
