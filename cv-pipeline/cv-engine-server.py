@@ -54,7 +54,15 @@ async def analyze_location(lat: float, lng: float):
         
         # --- 2. RUN CV PIPELINE ---
         roof_img = get_satellite_image(lat, lng)
+        
+        # Debugging: Show the actual image being passed to the Vision LLM
+        print("DEBUG: Opening the satellite image in default viewer...")
+        roof_img.show()
+        
         cv_result = detect_cooling_towers(roof_img)
+        
+        # Debugging: Print Gemini's raw JSON response
+        print(f"DEBUG: Gemini Response: {json.dumps(cv_result, indent=2)}")
         
         # --- 3. RETURN COMPILED JSON TO NEXT.JS ---
         return {

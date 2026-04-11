@@ -32,7 +32,7 @@ function EngineResultsCard({ data, onClose }: { data: any; onClose: () => void }
             ✕
           </button>
         </div>
-        
+
         <div className="space-y-4 p-4">
           {/* Spatial Data */}
           <div>
@@ -137,7 +137,7 @@ export function MapView({ className, onBuildingSelect }: MapViewProps) {
           zoom: 10,
         }}
         mapboxAccessToken={mapboxToken}
-        mapStyle="mapbox://styles/mapbox/light-v11"
+        mapStyle="mapbox://styles/mapbox/satellite-v9"
         style={{ width: "100%", height: "100%" }}
         onClick={async (event) => {
           const lat = event.lngLat.lat;
