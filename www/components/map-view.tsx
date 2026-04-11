@@ -1,45 +1,22 @@
 "use client";
 
-import { Building2, MapPin } from "lucide-react";
 import { useState } from "react";
-import Map, { Marker, NavigationControl, Popup } from "react-map-gl/mapbox";
+import Map, { NavigationControl } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-export interface BuildingMarker {
-  id: string;
-  lat: number;
-  long: number;
-  label: string;
+export interface BuildingSelection {
+  latitude: number;
+  longitude: number;
 }
-
-const mockDallasBuildings: BuildingMarker[] = [
-  {
-    id: "DAL-001",
-    lat: 32.7845,
-    long: -96.8068,
-    label: "North Stemmons Distribution Campus",
-  },
-  {
-    id: "DAL-002",
-    lat: 32.7487,
-    long: -96.8321,
-    label: "Trinity Corridor Data Facility",
-  },
-  {
-    id: "DAL-003",
-    lat: 32.8124,
-    long: -96.7642,
-    label: "Mockingbird Industrial Plaza",
-  },
-];
 
 type MapViewProps = {
   className?: string;
+  onBuildingSelect?: (selection: BuildingSelection) => void;
 };
 
-export function MapView({ className }: MapViewProps) {
+export function MapView({ className, onBuildingSelect }: MapViewProps) {
   const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
-  const [selectedMarker, setSelectedMarker] = useState<BuildingMarker | null>(null);
+  const [lastSelection, setLastSelection] = useState<BuildingSelection | null>(null);
 
   if (!mapboxToken) {
     return (
@@ -55,7 +32,7 @@ export function MapView({ className }: MapViewProps) {
   }
 
   return (
-    <div className={["h-full w-full", className].join(" ")}>
+    <div className={["relative h-full w-full", className].join(" ")}>
       <Map
         initialViewState={{
           latitude: 32.7767,
@@ -65,42 +42,26 @@ export function MapView({ className }: MapViewProps) {
         mapboxAccessToken={mapboxToken}
         mapStyle="mapbox://styles/mapbox/light-v11"
         style={{ width: "100%", height: "100%" }}
+        onClick={(event) => {
+          const selection: BuildingSelection = {
+            latitude: event.lngLat.lat,
+            longitude: event.lngLat.lng,
+          };
+
+          console.log("Map click coordinates:", selection);
+          setLastSelection(selection);
+          onBuildingSelect?.(selection);
+        }}
       >
         <NavigationControl position="top-right" />
-
-        {mockDallasBuildings.map((building) => (
-          <Marker key={building.id} latitude={building.lat} longitude={building.long} anchor="bottom">
-            <button
-              type="button"
-              onClick={() => {
-                console.log("Selected building:", building.id);
-                setSelectedMarker(building);
-              }}
-              className="group rounded-full bg-cyan-700 p-2 text-white shadow-lg transition hover:bg-cyan-600"
-              aria-label={building.label}
-            >
-              <MapPin className="h-4 w-4" />
-            </button>
-          </Marker>
-        ))}
-
-        {selectedMarker ? (
-          <Popup
-            latitude={selectedMarker.lat}
-            longitude={selectedMarker.long}
-            anchor="top"
-            closeOnClick={false}
-            onClose={() => setSelectedMarker(null)}
-          >
-            <div className="space-y-1 p-1">
-              <p className="inline-flex items-center gap-1 text-xs font-semibold text-slate-700">
-                <Building2 className="h-3.5 w-3.5" /> {selectedMarker.id}
-              </p>
-              <p className="text-xs text-slate-600">{selectedMarker.label}</p>
-            </div>
-          </Popup>
-        ) : null}
       </Map>
+
+      {lastSelection ? (
+        <div className="pointer-events-none absolute bottom-3 left-3 rounded-md bg-slate-900/90 px-3 py-2 text-xs text-white shadow-lg">
+          <p>Lat: {lastSelection.latitude.toFixed(6)}</p>
+          <p>Lng: {lastSelection.longitude.toFixed(6)}</p>
+        </div>
+      ) : null}
     </div>
   );
 }

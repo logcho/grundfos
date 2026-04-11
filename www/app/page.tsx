@@ -1,9 +1,15 @@
 "use client";
 
 import { MapPlaceholder } from "@/components/map-placeholder";
+import type { BuildingSelection } from "@/components/map-view";
 import { Sidebar } from "@/components/sidebar";
 
 export default function Home() {
+  function handleBuildingSelect(selection: BuildingSelection) {
+    // Ready to send this payload to your backend endpoint.
+    console.log("Building selected for backend:", selection);
+  }
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-[linear-gradient(155deg,#f8fafc_0%,#e2e8f0_100%)]">
       <div className="flex min-h-screen flex-col lg:flex-row">
@@ -21,7 +27,7 @@ export default function Home() {
           </div>
 
           <div className="h-[calc(100vh-7.5rem)] min-h-[520px]">
-            <MapPlaceholder />
+            <MapPlaceholder onBuildingSelect={handleBuildingSelect} />
           </div>
         </main>
       </div>

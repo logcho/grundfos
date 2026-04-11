@@ -1,7 +1,11 @@
 import { Globe } from "lucide-react";
-import { MapView } from "@/components/map-view";
+import { MapView, type BuildingSelection } from "@/components/map-view";
 
-export function MapPlaceholder() {
+type MapPlaceholderProps = {
+  onBuildingSelect?: (selection: BuildingSelection) => void;
+};
+
+export function MapPlaceholder({ onBuildingSelect }: MapPlaceholderProps) {
   return (
     <section className="relative h-full min-h-[280px] overflow-hidden rounded-2xl border border-slate-200 bg-white p-5">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(14,116,144,0.18),transparent_45%),linear-gradient(160deg,#f8fafc_20%,#e2e8f0_90%)]" />
@@ -17,7 +21,7 @@ export function MapPlaceholder() {
         </div>
 
         <div className="relative flex flex-1 overflow-hidden rounded-xl border border-dashed border-slate-300 bg-white/70">
-          <MapView />
+          <MapView onBuildingSelect={onBuildingSelect} />
         </div>
       </div>
     </section>
